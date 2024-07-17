@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "980854500772",
+    "project_id": "news-app-802e3",
+    "storage_bucket": "news-app-802e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980854500772:android:d45b1d8f43bb5256ab6531",
+        "android_client_info": {
+          "package_name": "com.sptpra.newsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgNdCGM2mPydD-qkBW4us6-HDQ2_QPbwg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

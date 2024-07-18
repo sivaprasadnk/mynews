@@ -17,29 +17,17 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -59,4 +47,43 @@ class DefaultFirebaseOptions {
     projectId: 'news-app-802e3',
     storageBucket: 'news-app-802e3.appspot.com',
   );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyAIkWFRNUMGEFIB5gSIGi7t8KQaj8BKwSg',
+    appId: '1:980854500772:web:1a475b6f913f4228ab6531',
+    messagingSenderId: '980854500772',
+    projectId: 'news-app-802e3',
+    authDomain: 'news-app-802e3.firebaseapp.com',
+    storageBucket: 'news-app-802e3.appspot.com',
+    measurementId: 'G-XP22SC6ZC2',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyDtz9pifvzg8YnsTqEOQ6eu0RzJlly9eMk',
+    appId: '1:980854500772:ios:44ed8420ca55bd3fab6531',
+    messagingSenderId: '980854500772',
+    projectId: 'news-app-802e3',
+    storageBucket: 'news-app-802e3.appspot.com',
+    iosBundleId: 'com.sptpra.newsApp',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyDtz9pifvzg8YnsTqEOQ6eu0RzJlly9eMk',
+    appId: '1:980854500772:ios:44ed8420ca55bd3fab6531',
+    messagingSenderId: '980854500772',
+    projectId: 'news-app-802e3',
+    storageBucket: 'news-app-802e3.appspot.com',
+    iosBundleId: 'com.sptpra.newsApp',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyAIkWFRNUMGEFIB5gSIGi7t8KQaj8BKwSg',
+    appId: '1:980854500772:web:104bf9b1e79a2354ab6531',
+    messagingSenderId: '980854500772',
+    projectId: 'news-app-802e3',
+    authDomain: 'news-app-802e3.firebaseapp.com',
+    storageBucket: 'news-app-802e3.appspot.com',
+    measurementId: 'G-Q31TLWJKHC',
+  );
+
 }

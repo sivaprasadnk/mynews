@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/core/utils/common_colors.dart';
+import 'package:news_app/core/utils/common_strings.dart';
 import 'package:news_app/presentation/provider/firebase_provider.dart';
 import 'package:news_app/presentation/screens/signup/signup_screen.dart';
 import 'package:news_app/presentation/widgets/common_btn.dart';
@@ -46,10 +47,10 @@ class _SignInScreenState extends State<SignInScreen> {
             children: [
               const SizedBox(height: 80),
               Text(
-                'kAppName',
+                kAppName,
                 style: TextStyle(
                   color: kBlueColor,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w700,
                   fontSize: 20,
                 ),
               ),

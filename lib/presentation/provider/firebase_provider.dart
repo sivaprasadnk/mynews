@@ -43,6 +43,16 @@ class FirebaseProvider with ChangeNotifier {
     _message = "";
     _isLoading = true;
     notifyListeners();
+    if (email.isEmpty) {
+      _message = "Email cannot be empty!";
+      showErrorMessage(context);
+      return;
+    }
+    if (password.isEmpty) {
+      _message = "Password cannot be empty!";
+      showErrorMessage(context);
+      return;
+    }
 
     final failureOrUser =
         await signInWithEmail(SignInParams(email: email, password: password));
@@ -70,7 +80,21 @@ class FirebaseProvider with ChangeNotifier {
     _message = "";
     _isLoading = true;
     notifyListeners();
-
+    if (name.isEmpty) {
+      _message = "Name cannot be empty!";
+      showErrorMessage(context);
+      return;
+    }
+    if (email.isEmpty) {
+      _message = "Email cannot be empty!";
+      showErrorMessage(context);
+      return;
+    }
+    if (password.isEmpty) {
+      _message = "Password cannot be empty!";
+      showErrorMessage(context);
+      return;
+    }
     final failureOrUser =
         await signUpWithEmail(SignUpParams(email: email, password: password));
     failureOrUser.fold(
@@ -120,6 +144,9 @@ class FirebaseProvider with ChangeNotifier {
         content: Text(_message!),
       ),
     );
+    _message = "";
+    _isLoading = false;
+    notifyListeners();
   }
 
   Future<void> signOutUser(BuildContext context) async {

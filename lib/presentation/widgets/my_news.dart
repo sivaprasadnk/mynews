@@ -22,6 +22,7 @@ class MyNews extends StatelessWidget {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: kBlueColor),
           useMaterial3: true,
+          fontFamily: 'Poppins',
         ),
         debugShowCheckedModeBanner: false,
         home: const SignUpScreen(),

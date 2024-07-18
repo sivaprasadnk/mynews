@@ -53,7 +53,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 kAppName,
                 style: TextStyle(
                   color: kBlueColor,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w700,
                   fontSize: 20,
                 ),
               ),

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:news_app/core/error/failures.dart';
-import 'package:news_app/domain/repository/auth_repository.dart';
+import 'package:my_news/core/error/failures.dart';
+import 'package:my_news/domain/repository/auth_repository.dart';
 
 class SignOut {
   final AuthRepository repository;

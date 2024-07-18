@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/core/utils/common_colors.dart';
-import 'package:news_app/core/utils/common_strings.dart';
-import 'package:news_app/core/utils/locator.dart' as di;
-import 'package:news_app/presentation/provider/firebase_provider.dart';
-import 'package:news_app/presentation/provider/news_provider.dart';
-import 'package:news_app/presentation/screens/signup/signup_screen.dart';
+import 'package:my_news/core/utils/common_colors.dart';
+import 'package:my_news/core/utils/common_strings.dart';
+import 'package:my_news/core/utils/locator.dart' as di;
+import 'package:my_news/presentation/provider/firebase_provider.dart';
+import 'package:my_news/presentation/provider/news_provider.dart';
+import 'package:my_news/presentation/screens/signup/signup_screen.dart';
 import 'package:provider/provider.dart';
 
-class MyNews extends StatelessWidget {
-  const MyNews({super.key});
+class MyNewsApp extends StatelessWidget {
+  const MyNewsApp({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/core/utils/common_colors.dart';
-import 'package:news_app/core/utils/common_strings.dart';
-import 'package:news_app/presentation/provider/firebase_provider.dart';
-import 'package:news_app/presentation/provider/news_provider.dart';
-import 'package:news_app/presentation/screens/news_details/news_details_screen.dart';
-import 'package:news_app/presentation/widgets/loading_shimmer.dart';
+import 'package:my_news/core/utils/common_colors.dart';
+import 'package:my_news/core/utils/common_strings.dart';
+import 'package:my_news/presentation/provider/firebase_provider.dart';
+import 'package:my_news/presentation/provider/news_provider.dart';
+import 'package:my_news/presentation/screens/news_details/news_details_screen.dart';
+import 'package:my_news/presentation/widgets/loading_shimmer.dart';
 import 'package:provider/provider.dart';
-
+import 'package:timeago/timeago.dart' as timeago;
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -108,6 +108,8 @@ class NewsList extends StatelessWidget {
             itemCount: provider.news?.length ?? 0,
             itemBuilder: (context, index) {
               final newsItem = provider.news![index];
+              DateTime dateObject = DateTime.parse(newsItem.publishedAt!);
+              String timeAgo = timeago.format(dateObject);
               return newsItem.title!.isNotEmpty &&
                       newsItem.description!.isNotEmpty &&
                       newsItem.title != "[Removed]"
@@ -155,7 +157,14 @@ class NewsList extends StatelessWidget {
                                       maxLines: 3,
                                       overflow: TextOverflow.ellipsis,
                                     ),
-                                  )
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    timeAgo,
+                                    style: const TextStyle(
+                                      fontStyle: FontStyle.italic,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),

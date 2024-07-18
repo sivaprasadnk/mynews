@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/core/utils/extensions/color_extensions.dart';
+import 'package:my_news/core/utils/extensions/color_extensions.dart';
 
 Color kBlueColor = HexColor.fromHex('0C54BE');
 Color kDarkBlueColor = HexColor.fromHex('303f60');

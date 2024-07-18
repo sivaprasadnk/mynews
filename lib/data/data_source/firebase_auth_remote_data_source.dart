@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:news_app/core/utils/common_strings.dart';
+import 'package:my_news/core/utils/common_strings.dart';
 
 abstract class FirebaseAuthRemoteDataSource {
   Future<User?> signInWithEmail(String email, String password);

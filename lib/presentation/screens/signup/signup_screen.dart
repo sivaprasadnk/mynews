@@ -1,11 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app/core/utils/common_colors.dart';
-import 'package:news_app/core/utils/common_strings.dart';
-import 'package:news_app/presentation/provider/firebase_provider.dart';
-import 'package:news_app/presentation/screens/signin/signin_screen.dart';
-import 'package:news_app/presentation/widgets/common_btn.dart';
-import 'package:news_app/presentation/widgets/textfield_container.dart';
+import 'package:my_news/core/utils/common_colors.dart';
+import 'package:my_news/core/utils/common_strings.dart';
+import 'package:my_news/presentation/provider/firebase_provider.dart';
+import 'package:my_news/presentation/screens/signin/signin_screen.dart';
+import 'package:my_news/presentation/widgets/common_btn.dart';
+import 'package:my_news/presentation/widgets/textfield_container.dart';
 import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {

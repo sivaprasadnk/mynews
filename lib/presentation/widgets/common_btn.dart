@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/core/utils/common_colors.dart';
+import 'package:my_news/core/utils/common_colors.dart';
 
 class CommonBtn extends StatelessWidget {
   const CommonBtn({

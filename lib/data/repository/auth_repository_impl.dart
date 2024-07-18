@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:news_app/core/error/failures.dart';
-import 'package:news_app/core/utils/common_strings.dart';
-import 'package:news_app/data/data_source/firebase_auth_remote_data_source.dart';
-import 'package:news_app/domain/repository/auth_repository.dart';
+import 'package:my_news/core/error/failures.dart';
+import 'package:my_news/core/utils/common_strings.dart';
+import 'package:my_news/data/data_source/firebase_auth_remote_data_source.dart';
+import 'package:my_news/domain/repository/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final FirebaseAuthRemoteDataSource remoteDataSource;

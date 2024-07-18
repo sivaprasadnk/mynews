@@ -1,4 +1,4 @@
-import 'package:news_app/core/utils/common_strings.dart';
+import 'package:my_news/core/utils/common_strings.dart';
 
 abstract class Failure {
   String msg;

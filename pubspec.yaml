@@ -1,4 +1,4 @@
-name: news_app
+name: my_news
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -46,6 +46,7 @@ dependencies:
   firebase_remote_config: ^4.4.7
   firebase_analytics: ^10.10.7
   shimmer: ^3.0.0
+  timeago: ^3.7.0
 
 dev_dependencies:
   flutter_test:

@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:news_app/core/error/exceptions.dart';
-import 'package:news_app/core/error/failures.dart';
-import 'package:news_app/data/data_source/remote_config_data_source.dart';
-import 'package:news_app/domain/repository/config_repository.dart';
+import 'package:my_news/core/error/exceptions.dart';
+import 'package:my_news/core/error/failures.dart';
+import 'package:my_news/data/data_source/remote_config_data_source.dart';
+import 'package:my_news/domain/repository/config_repository.dart';
 
 class ConfigRepositoryImpl implements ConfigRepository {
   final RemoteConfigDataSource remoteDataSource;

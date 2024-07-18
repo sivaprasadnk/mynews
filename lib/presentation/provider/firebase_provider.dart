@@ -1,14 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app/core/error/failures.dart';
-import 'package:news_app/domain/use_cases/get_country_code.dart';
-import 'package:news_app/domain/use_cases/save_name.dart';
-import 'package:news_app/domain/use_cases/sign_in_with_email.dart';
-import 'package:news_app/domain/use_cases/sign_out.dart';
-import 'package:news_app/domain/use_cases/sign_up_with_email.dart';
-import 'package:news_app/presentation/provider/news_provider.dart';
-import 'package:news_app/presentation/screens/home/home_screen.dart';
-import 'package:news_app/presentation/screens/signin/signin_screen.dart';
+import 'package:my_news/core/error/failures.dart';
+import 'package:my_news/domain/use_cases/get_country_code.dart';
+import 'package:my_news/domain/use_cases/save_name.dart';
+import 'package:my_news/domain/use_cases/sign_in_with_email.dart';
+import 'package:my_news/domain/use_cases/sign_out.dart';
+import 'package:my_news/domain/use_cases/sign_up_with_email.dart';
+import 'package:my_news/presentation/provider/news_provider.dart';
+import 'package:my_news/presentation/screens/home/home_screen.dart';
+import 'package:my_news/presentation/screens/signin/signin_screen.dart';
 import 'package:provider/provider.dart';
 
 class FirebaseProvider with ChangeNotifier {

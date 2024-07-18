@@ -4,11 +4,13 @@ class News extends Equatable {
   final String? title;
   final String? description;
   final String? imageUrl;
+  final String? publishedAt;
 
   const News({
     required this.title,
     required this.description,
     required this.imageUrl,
+    required this.publishedAt,
   });
 
   @override
@@ -16,5 +18,6 @@ class News extends Equatable {
         title,
         description,
         imageUrl,
+        publishedAt,
       ];
 }

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/core/utils/common_colors.dart';
-import 'package:news_app/domain/entity/news.dart';
-
+import 'package:my_news/core/utils/common_colors.dart';
+import 'package:my_news/domain/entity/news.dart';
+import 'package:timeago/timeago.dart' as timeago;
 class NewsDetailsScreen extends StatelessWidget {
   const NewsDetailsScreen({super.key, required this.news});
   final News news;
 
   @override
   Widget build(BuildContext context) {
+    DateTime dateObject = DateTime.parse(news.publishedAt!);
+    String timeAgo = timeago.format(dateObject);
     return Scaffold(
       backgroundColor: kGreyColor,
       appBar: AppBar(),
@@ -41,6 +43,13 @@ class NewsDetailsScreen extends StatelessWidget {
                 ),
               ),
             const SizedBox(height: 16),
+            Text(
+              timeAgo,
+              style: const TextStyle(
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+            const SizedBox(height: 10),
             Text(
               news.description ?? "",
               style: const TextStyle(

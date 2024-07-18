@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/utils/common_colors.dart';
 import 'package:news_app/core/utils/common_strings.dart';
+import 'package:news_app/presentation/provider/firebase_provider.dart';
 import 'package:news_app/presentation/provider/news_provider.dart';
-import 'package:news_app/presentation/provider/user_auth_provider.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           GestureDetector(
             onTap: () async {
-              await context.read<UserAuthProvider>().signOutUser(context);
+              await context.read<FirebaseProvider>().signOutUser(context);
             },
             child: Icon(
               Icons.logout,

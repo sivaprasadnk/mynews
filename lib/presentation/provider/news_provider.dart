@@ -17,11 +17,11 @@ class NewsProvider with ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  Future<void> fetchNews() async {
+  Future<void> fetchNews(String country) async {
     _isLoading = true;
     notifyListeners();
-
-    final failureOrNews = await getNews();
+    
+    final failureOrNews = await getNews(country);
     failureOrNews.fold(
       (failure) => _message = _mapFailureToMessage(failure),
       (news) => _news = news,

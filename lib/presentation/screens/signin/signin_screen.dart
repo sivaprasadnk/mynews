@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/core/utils/common_colors.dart';
-import 'package:news_app/presentation/provider/user_auth_provider.dart';
+import 'package:news_app/presentation/provider/firebase_provider.dart';
 import 'package:news_app/presentation/screens/signup/signup_screen.dart';
 import 'package:news_app/presentation/widgets/common_btn.dart';
 import 'package:news_app/presentation/widgets/textfield_container.dart';
@@ -25,7 +25,7 @@ class _SignInScreenState extends State<SignInScreen> {
     var result = _formKey.currentState!.validate();
     if (result) {
       _formKey.currentState!.save();
-      context.read<UserAuthProvider>().signIn(_email, _password, context);
+      context.read<FirebaseProvider>().signIn(_email, _password, context);
     }
   }
 
@@ -78,7 +78,7 @@ class _SignInScreenState extends State<SignInScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Consumer<UserAuthProvider>(builder: (_, provider, __) {
+                  Consumer<FirebaseProvider>(builder: (_, provider, __) {
                     return CommonBtn(
                       onTap: () {
                         login();

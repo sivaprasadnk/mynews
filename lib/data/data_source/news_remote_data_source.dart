@@ -1,11 +1,11 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:news_app/core/error/exceptions.dart';
 import 'package:news_app/data/models/news_model.dart';
 
 abstract class NewsRemoteDataSource {
-  Future<List<NewsModel>> getNews();
+  Future<List<NewsModel>> getNews(String country);
 }
 
 class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
@@ -14,20 +14,22 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
   NewsRemoteDataSourceImpl({required this.client});
 
   @override
-  Future<List<NewsModel>> getNews() async {
+  Future<List<NewsModel>> getNews(String country) async {
+    var url =
+        'https://newsapi.org/v2/top-headlines?country=$country&apiKey=8c37ef36eb7046068599b4c4d4309867';
+    debugPrint('url :$url');
     final response = await client.get(
-      Uri.parse(
-          'https://newsapi.org/v2/top-headlines?country=us&apiKey=8c37ef36eb7046068599b4c4d4309867'),
+      Uri.parse(url),
       headers: {'Content-Type': 'application/json'},
     );
 
-    if (response.statusCode == 200) {
-      final jsonData = json.decode(response.body);
-      return (jsonData['articles'] as List)
-          .map((article) => NewsModel.fromJson(article))
-          .toList();
-    } else {
-      throw ServerException();
-    }
+    // if (response.statusCode == 200) {
+    final jsonData = json.decode(response.body);
+    return (jsonData['articles'] as List)
+        .map((article) => NewsModel.fromJson(article))
+        .toList();
+    // } else {
+    //   throw ServerException();
+    // }
   }
 }

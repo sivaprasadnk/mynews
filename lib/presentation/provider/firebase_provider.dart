@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/core/error/failures.dart';
+import 'package:news_app/domain/use_cases/get_country_code.dart';
 import 'package:news_app/domain/use_cases/save_name.dart';
 import 'package:news_app/domain/use_cases/sign_in_with_email.dart';
 import 'package:news_app/domain/use_cases/sign_out.dart';
@@ -10,21 +11,26 @@ import 'package:news_app/presentation/screens/home/home_screen.dart';
 import 'package:news_app/presentation/screens/signin/signin_screen.dart';
 import 'package:provider/provider.dart';
 
-class UserAuthProvider with ChangeNotifier {
+class FirebaseProvider with ChangeNotifier {
   final SignInWithEmail signInWithEmail;
   final SignUpWithEmail signUpWithEmail;
   final SignOut signOut;
   final SaveDetails saveName;
+  final GetCountryCode getCountryCode;
 
-  UserAuthProvider({
+  FirebaseProvider({
     required this.signInWithEmail,
     required this.signUpWithEmail,
     required this.signOut,
     required this.saveName,
+    required this.getCountryCode,
   });
 
   User? _user;
   User? get user => _user;
+
+  String _countryCode = 'in';
+  String get countryCode => _countryCode;
 
   String? _message;
   String? get message => _message;
@@ -73,7 +79,6 @@ class UserAuthProvider with ChangeNotifier {
     );
     if (failureOrUser.isRight()) {
       _message = "";
-      debugPrint('success @provider');
       final successOrFailure = await saveName(_user!, name);
       successOrFailure.fold(
         (failure) => _message = _mapFailureToMessage(failure),
@@ -92,10 +97,21 @@ class UserAuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  navigateToHome(BuildContext context) {
-    context.read<NewsProvider>().fetchNews();
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+  navigateToHome(BuildContext context) async {
+    final successOrFailure = await getCountryCode();
+    successOrFailure.fold(
+      (failure) => _countryCode = 'in',
+      (data) => _countryCode = data,
+    );
+    debugPrint('country :: $countryCode');
+    if (context.mounted) {
+      if (countryCode.isEmpty) {
+        _countryCode = 'in';
+      }
+      context.read<NewsProvider>().fetchNews(_countryCode);
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+    }
   }
 
   showErrorMessage(BuildContext context) {

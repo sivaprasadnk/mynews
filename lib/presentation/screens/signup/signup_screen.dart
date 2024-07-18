@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/core/utils/common_colors.dart';
 import 'package:news_app/core/utils/common_strings.dart';
-import 'package:news_app/presentation/provider/user_auth_provider.dart';
+import 'package:news_app/presentation/provider/firebase_provider.dart';
 import 'package:news_app/presentation/screens/signin/signin_screen.dart';
 import 'package:news_app/presentation/widgets/common_btn.dart';
 import 'package:news_app/presentation/widgets/textfield_container.dart';
@@ -28,7 +28,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     if (result) {
       _formKey.currentState!.save();
       context
-          .read<UserAuthProvider>()
+          .read<FirebaseProvider>()
           .signUp(_name, _email, _password, context);
     }
   }
@@ -60,6 +60,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(height: 150),
               TextfieldContainer(
                 child: TextFormField(
+                  onFieldSubmitted: (value) {
+                    _name = value;
+                    saveData();
+                  },
                   onSaved: (newValue) {
                     _name = newValue ?? "";
                   },
@@ -73,6 +77,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(height: 15),
               TextfieldContainer(
                 child: TextFormField(
+                  onFieldSubmitted: (value) {
+                    _email = value;
+                    saveData();
+                  },
                   onSaved: (newValue) {
                     _email = newValue ?? "";
                   },
@@ -86,6 +94,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(height: 15),
               TextfieldContainer(
                 child: TextFormField(
+                  onFieldSubmitted: (value) {
+                    _password = value;
+                    saveData();
+                  },
                   onSaved: (newValue) {
                     _password = newValue ?? "";
                   },
@@ -100,7 +112,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Consumer<UserAuthProvider>(builder: (_, provider, __) {
+                  Consumer<FirebaseProvider>(builder: (_, provider, __) {
                     return CommonBtn(
                       onTap: () {
                         saveData();

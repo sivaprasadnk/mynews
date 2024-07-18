@@ -5,7 +5,7 @@ import 'package:news_app/data/data_source/remote_config_data_source.dart';
 import 'package:news_app/domain/repository/config_repository.dart';
 
 class ConfigRepositoryImpl implements ConfigRepository {
-  final FirebaseRemoteConfigDataSource remoteDataSource;
+  final RemoteConfigDataSource remoteDataSource;
 
   ConfigRepositoryImpl({required this.remoteDataSource});
 

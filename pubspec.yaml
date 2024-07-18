@@ -41,7 +41,9 @@ dependencies:
   equatable: ^2.0.5
   dartz: ^0.10.1
   get_it: ^7.7.0
-  firebase_auth: ^4.20.0
+  firebase_auth: ^4.19.6
+  cloud_firestore: ^4.17.5
+  firebase_remote_config: ^4.4.7
 
 dev_dependencies:
   flutter_test:

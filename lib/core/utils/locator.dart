@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
@@ -8,6 +9,7 @@ import 'package:news_app/data/repository/news_repository_impl.dart';
 import 'package:news_app/domain/repository/auth_repository.dart';
 import 'package:news_app/domain/repository/news_repository.dart';
 import 'package:news_app/domain/use_cases/get_news.dart';
+import 'package:news_app/domain/use_cases/save_name.dart';
 import 'package:news_app/domain/use_cases/sign_in_with_email.dart';
 import 'package:news_app/domain/use_cases/sign_up_with_email.dart';
 import 'package:news_app/presentation/provider/user_auth_provider.dart';
@@ -24,6 +26,7 @@ Future<void> init() async {
         signInWithEmail: sl(),
         signUpWithEmail: sl(),
         signOut: sl(),
+        saveName: sl(),
       ));
 
   // Use cases
@@ -31,6 +34,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => SignInWithEmail(sl()));
   sl.registerLazySingleton(() => SignUpWithEmail(sl()));
   sl.registerLazySingleton(() => SignOut(sl()));
+  sl.registerLazySingleton(() => SaveDetails(sl()));
 
   // Repository
   sl.registerLazySingleton<NewsRepository>(
@@ -45,10 +49,14 @@ Future<void> init() async {
     () => NewsRemoteDataSourceImpl(client: sl()),
   );
   sl.registerLazySingleton<FirebaseAuthRemoteDataSource>(
-    () => FirebaseAuthRemoteDataSourceImpl(firebaseAuth: sl()),
+    () => FirebaseAuthRemoteDataSourceImpl(
+      firebaseAuth: sl(),
+      firebaseFirestore: sl(),
+    ),
   );
 
   // External
   sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton(() => FirebaseAuth.instance);
+  sl.registerLazySingleton(() => FirebaseFirestore.instance);
 }

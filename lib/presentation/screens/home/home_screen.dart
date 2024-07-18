@@ -23,9 +23,28 @@ class _HomeScreenState extends State<HomeScreen> {
           kAppName,
           style: TextStyle(
             color: kWhiteColor,
+            fontWeight: FontWeight.w700,
           ),
         ),
         actions: [
+          Consumer<FirebaseProvider>(
+            builder: (_, provider, __) {
+              return Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.navigation_rounded, color: kWhiteColor),
+                  const SizedBox(width: 5),
+                  Text(
+                    provider.countryCode.toUpperCase(),
+                    style: TextStyle(
+                      color: kWhiteColor,
+                    ),
+                  )
+                ],
+              );
+            },
+          ),
+          const SizedBox(width: 16),
           GestureDetector(
             onTap: () async {
               await context.read<FirebaseProvider>().signOutUser(context);
@@ -34,10 +53,31 @@ class _HomeScreenState extends State<HomeScreen> {
               Icons.logout,
               color: kWhiteColor,
             ),
-          )
+          ),
+          const SizedBox(width: 16),
         ],
       ),
-      body: const NewsList(),
+      body: const Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(
+              top: 16,
+              left: 16,
+            ),
+            child: Text(
+              'Top Headlines',
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+          Expanded(
+            child: NewsList(),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -73,7 +113,7 @@ class NewsList extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.6,
+                            width: MediaQuery.of(context).size.width * 0.55,
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,7 +124,7 @@ class NewsList extends StatelessWidget {
                                   child: Text(
                                     newsItem.title ?? "",
                                     style: const TextStyle(
-                                      fontWeight: FontWeight.w500,
+                                      fontWeight: FontWeight.w700,
                                     ),
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -92,7 +132,7 @@ class NewsList extends StatelessWidget {
                                 const SizedBox(height: 15),
                                 SizedBox(
                                   width:
-                                      MediaQuery.of(context).size.width * 0.6,
+                                      MediaQuery.of(context).size.width * 0.55,
                                   // height: 100,
                                   child: Text(
                                     newsItem.description ?? "",
@@ -104,6 +144,8 @@ class NewsList extends StatelessWidget {
                               ],
                             ),
                           ),
+                          const Spacer(),
+                          // const SizedBox(width: 5),
                           if (newsItem.imageUrl != null)
                             ClipRRect(
                               borderRadius: BorderRadius.circular(10),

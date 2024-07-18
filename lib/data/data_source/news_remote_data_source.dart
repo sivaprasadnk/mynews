@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:news_app/core/utils/common_strings.dart';
 import 'package:news_app/data/models/news_model.dart';
 
 abstract class NewsRemoteDataSource {
@@ -16,7 +15,7 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
   @override
   Future<List<NewsModel>> getNews(String country) async {
     var url =
-        '${kApiBaseUrl}top-headlines?country=$country&apiKey=8c37ef36eb7046068599b4c4d4309867';
+        'https://newsapi.org/v2/top-headlines?country=$country&apiKey=8c37ef36eb7046068599b4c4d4309867';
     final response = await client.get(
       Uri.parse(url),
       headers: {'Content-Type': 'application/json'},

@@ -67,8 +67,6 @@ class FirebaseProvider with ChangeNotifier {
         showErrorMessage(context);
       }
     }
-    _isLoading = false;
-    notifyListeners();
   }
 
   Future<void> signUp(
@@ -116,9 +114,8 @@ class FirebaseProvider with ChangeNotifier {
         showErrorMessage(context);
       }
     }
-
-    _isLoading = false;
-    notifyListeners();
+    // _isLoading = false;
+    // notifyListeners();
   }
 
   navigateToHome(BuildContext context) async {
@@ -127,12 +124,13 @@ class FirebaseProvider with ChangeNotifier {
       (failure) => _countryCode = 'in',
       (data) => _countryCode = data,
     );
-    debugPrint('country :: $countryCode');
     if (context.mounted) {
       if (countryCode.isEmpty) {
         _countryCode = 'in';
       }
       context.read<NewsProvider>().fetchNews(_countryCode);
+      _isLoading = false;
+      notifyListeners();
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (_) => const HomeScreen()));
     }

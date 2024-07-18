@@ -32,7 +32,6 @@ class NewsProvider with ChangeNotifier {
   }
 
   String _mapFailureToMessage(Failure failure) {
-    // Handle different types of failures
-    return 'Server Failure';
+    return failure.msg;
   }
 }

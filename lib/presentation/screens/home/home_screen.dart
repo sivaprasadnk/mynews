@@ -133,7 +133,6 @@ class NewsList extends StatelessWidget {
                                 SizedBox(
                                   width:
                                       MediaQuery.of(context).size.width * 0.55,
-                                  // height: 100,
                                   child: Text(
                                     newsItem.description ?? "",
                                     style: const TextStyle(),
@@ -145,7 +144,6 @@ class NewsList extends StatelessWidget {
                             ),
                           ),
                           const Spacer(),
-                          // const SizedBox(width: 5),
                           if (newsItem.imageUrl != null)
                             ClipRRect(
                               borderRadius: BorderRadius.circular(10),

@@ -27,7 +27,6 @@ class CommonBtn extends StatelessWidget {
         child: Center(
           child: !isLoading
               ? Text(
-                  // "Signup",
                   title,
                   style: TextStyle(
                     color: kWhiteColor,

@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:news_app/core/error/failures.dart';
 import 'package:news_app/core/utils/common_strings.dart';
 import 'package:news_app/data/data_source/firebase_auth_remote_data_source.dart';
@@ -18,7 +17,6 @@ class AuthRepositoryImpl implements AuthRepository {
       final user = await remoteDataSource.signInWithEmail(email, password);
       return Right(user!);
     } on FirebaseAuthException catch (e) {
-      debugPrint('e :${e.code}, mesg:${e.message}');
       return Left(
           SignUpFailure(message: _mapFirebaseAuthExceptionToMessage(e)));
     }

@@ -18,8 +18,8 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  final String _email = "";
-  final String _password = "";
+  String _email = "";
+  String _password = "";
 
   login() async {
     FocusScope.of(context).unfocus();
@@ -58,6 +58,13 @@ class _SignInScreenState extends State<SignInScreen> {
               const SizedBox(height: 15),
               TextfieldContainer(
                 child: TextFormField(
+                  onFieldSubmitted: (value) {
+                    _email = value;
+                    login();
+                  },
+                  onSaved: (newValue) {
+                    _email = newValue!;
+                  },
                   keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                     hintText: ' Email',
@@ -69,6 +76,13 @@ class _SignInScreenState extends State<SignInScreen> {
               TextfieldContainer(
                 child: TextFormField(
                   obscureText: true,
+                  onFieldSubmitted: (value) {
+                    _password = value;
+                    login();
+                  },
+                  onSaved: (newValue) {
+                    _password = newValue!;
+                  },
                   decoration: const InputDecoration(
                     hintText: ' Password',
                     border: InputBorder.none,

@@ -68,6 +68,8 @@ class AuthRepositoryImpl implements AuthRepository {
         return 'The account already exists for that email.';
       case 'weak-password':
         return 'The password provided is too weak.';
+      case 'invalid-credential':
+        return 'Please check the email-id / password';
       default:
         return kErrorMsg;
     }

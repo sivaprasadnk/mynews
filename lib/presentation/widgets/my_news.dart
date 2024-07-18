@@ -21,6 +21,9 @@ class MyNews extends StatelessWidget {
         title: kAppName,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: kBlueColor),
+          appBarTheme: AppBarTheme(
+            backgroundColor: kBlueColor,
+          ),
           useMaterial3: true,
           fontFamily: 'Poppins',
         ),

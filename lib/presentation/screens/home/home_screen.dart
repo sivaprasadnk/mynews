@@ -3,6 +3,7 @@ import 'package:news_app/core/utils/common_colors.dart';
 import 'package:news_app/core/utils/common_strings.dart';
 import 'package:news_app/presentation/provider/firebase_provider.dart';
 import 'package:news_app/presentation/provider/news_provider.dart';
+import 'package:news_app/presentation/screens/news_details/news_details_screen.dart';
 import 'package:news_app/presentation/widgets/loading_shimmer.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: kGreyColor,
       appBar: AppBar(
-        backgroundColor: kBlueColor,
         title: Text(
           kAppName,
           style: TextStyle(
@@ -111,74 +111,83 @@ class NewsList extends StatelessWidget {
               return newsItem.title!.isNotEmpty &&
                       newsItem.description!.isNotEmpty &&
                       newsItem.title != "[Removed]"
-                  ? Container(
-                      margin: const EdgeInsets.only(bottom: 16),
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: kWhiteColor,
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SizedBox(
-                            width: width * 0.55,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  width: width * 0.6,
-                                  child: Text(
-                                    newsItem.title ?? "",
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w700,
+                  ? GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) =>
+                                    NewsDetailsScreen(news: newsItem)));
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.only(bottom: 16),
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: kWhiteColor,
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox(
+                              width: width * 0.55,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    width: width * 0.6,
+                                    child: Text(
+                                      newsItem.title ?? "",
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                ),
-                                const SizedBox(height: 15),
-                                SizedBox(
-                                  width: width * 0.55,
-                                  child: Text(
-                                    newsItem.description ?? "",
-                                    style: const TextStyle(),
-                                    maxLines: 3,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                )
-                              ],
+                                  const SizedBox(height: 15),
+                                  SizedBox(
+                                    width: width * 0.55,
+                                    child: Text(
+                                      newsItem.description ?? "",
+                                      style: const TextStyle(),
+                                      maxLines: 3,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                          const Spacer(),
-                          if (newsItem.imageUrl != null)
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.network(
-                                newsItem.imageUrl!,
+                            const Spacer(),
+                            if (newsItem.imageUrl != null)
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.network(
+                                  newsItem.imageUrl!,
+                                  height: 109,
+                                  width: 109,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return const Icon(Icons.error);
+                                  },
+                                ),
+                              )
+                            else
+                              Container(
                                 height: 109,
                                 width: 109,
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) {
-                                  return const Icon(Icons.error);
-                                },
-                              ),
-                            )
-                          else
-                            Container(
-                              height: 109,
-                              width: 109,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: kBlueColor,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: kBlueColor,
+                                  ),
                                 ),
-                              ),
-                              child: const Center(
-                                child: Text(" No Image"),
-                              ),
-                            )
-                        ],
+                                child: const Center(
+                                  child: Text(" No Image"),
+                                ),
+                              )
+                          ],
+                        ),
                       ),
                     )
                   : const SizedBox.shrink();

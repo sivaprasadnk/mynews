@@ -61,7 +61,8 @@ class _HomeScreenState extends State<HomeScreen> {
       body: RefreshIndicator(
         onRefresh: () async {
           var code = context.read<FirebaseProvider>().countryCode;
-          context.read<NewsProvider>().fetchNews(code);
+          var key = context.read<FirebaseProvider>().apiKey;
+          context.read<NewsProvider>().fetchNews(code, key!);
         },
         child: const Column(
           mainAxisSize: MainAxisSize.min,

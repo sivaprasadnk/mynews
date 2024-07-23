@@ -1,11 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_news/core/error/failures.dart';
-import 'package:my_news/domain/use_cases/get_country_code.dart';
-import 'package:my_news/domain/use_cases/save_name.dart';
-import 'package:my_news/domain/use_cases/sign_in_with_email.dart';
-import 'package:my_news/domain/use_cases/sign_out.dart';
-import 'package:my_news/domain/use_cases/sign_up_with_email.dart';
+import 'package:my_news/domain/use_cases/firebase/get_api_key.dart';
+import 'package:my_news/domain/use_cases/firebase/get_country_code_from_config.dart';
+import 'package:my_news/domain/use_cases/firebase/get_country_code_from_db.dart';
+import 'package:my_news/domain/use_cases/firebase/get_details_from_realtime_db.dart';
+import 'package:my_news/domain/use_cases/firebase/save_name.dart';
+import 'package:my_news/domain/use_cases/firebase/set_country_code.dart';
+import 'package:my_news/domain/use_cases/firebase/sign_in_with_email.dart';
+import 'package:my_news/domain/use_cases/firebase/sign_out.dart';
+import 'package:my_news/domain/use_cases/firebase/sign_up_with_email.dart';
 import 'package:my_news/presentation/provider/news_provider.dart';
 import 'package:my_news/presentation/screens/home/home_screen.dart';
 import 'package:my_news/presentation/screens/signin/signin_screen.dart';
@@ -16,14 +20,22 @@ class FirebaseProvider with ChangeNotifier {
   final SignUpWithEmail signUpWithEmail;
   final SignOut signOut;
   final SaveDetails saveName;
-  final GetCountryCode getCountryCode;
+  final GetCountryCodeFromConfig getCountryCodeFromConfig;
+  final GetCountryCodeFromDb getCountryCodeFromDb;
+  final SetCountryCode setCountryCode;
+  final GetApiKey getApiKey;
+  final GetDetailsFromRealtimeDb getDetails;
 
   FirebaseProvider({
     required this.signInWithEmail,
     required this.signUpWithEmail,
     required this.signOut,
     required this.saveName,
-    required this.getCountryCode,
+    required this.getCountryCodeFromConfig,
+    required this.getCountryCodeFromDb,
+    required this.setCountryCode,
+    required this.getApiKey,
+    required this.getDetails,
   });
 
   User? _user;
@@ -34,6 +46,9 @@ class FirebaseProvider with ChangeNotifier {
 
   String? _message;
   String? get message => _message;
+
+  String? _apiKey;
+  String? get apiKey => _apiKey;
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -119,20 +134,28 @@ class FirebaseProvider with ChangeNotifier {
   }
 
   navigateToHome(BuildContext context) async {
-    final successOrFailure = await getCountryCode();
+    final successOrFailure = await getDetails();
     successOrFailure.fold(
-      (failure) => _countryCode = 'in',
-      (data) => _countryCode = data,
+      (failure) {
+        _message = failure.msg;
+      },
+      (data) {
+        _countryCode = data['country_code'];
+        _apiKey = data['api_key'];
+      },
     );
     if (context.mounted) {
       if (countryCode.isEmpty) {
         _countryCode = 'in';
       }
-      context.read<NewsProvider>().fetchNews(_countryCode);
-      _isLoading = false;
-      notifyListeners();
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+      // await setCountryCode(_countryCode);
+      if (context.mounted) {
+        context.read<NewsProvider>().fetchNews(_countryCode, _apiKey!);
+        _isLoading = false;
+        notifyListeners();
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+      }
     }
   }
 

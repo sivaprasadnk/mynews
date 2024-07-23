@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:my_news/core/utils/common_colors.dart';
 import 'package:my_news/domain/entity/news.dart';
+import 'package:my_news/presentation/provider/tts_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
+
 class NewsDetailsScreen extends StatelessWidget {
   const NewsDetailsScreen({super.key, required this.news});
   final News news;
@@ -58,6 +61,18 @@ class NewsDetailsScreen extends StatelessWidget {
               ),
               // overflow: TextOverflow.ellipsis,
             ),
+            Consumer<TtsProvider>(builder: (_, provider, __) {
+              return GestureDetector(
+                onTap: () async {
+                  await provider.playText(news.description!);
+                },
+                child: !provider.isSpeaking
+                    ? const Icon(Icons.play_arrow)
+                    : const Icon(
+                        Icons.pause,
+                      ),
+              );
+            })
           ],
         ),
       ),

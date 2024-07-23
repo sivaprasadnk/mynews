@@ -4,6 +4,7 @@ import 'package:my_news/core/utils/common_strings.dart';
 import 'package:my_news/core/utils/locator.dart' as di;
 import 'package:my_news/presentation/provider/firebase_provider.dart';
 import 'package:my_news/presentation/provider/news_provider.dart';
+import 'package:my_news/presentation/provider/tts_provider.dart';
 import 'package:my_news/presentation/screens/signup/signup_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -15,6 +16,9 @@ class MyNewsApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => di.sl<NewsProvider>()),
+        ChangeNotifierProvider(
+          create: (context) => di.sl<TtsProvider>(),
+        ),
         ChangeNotifierProvider(create: (_) => di.sl<FirebaseProvider>()),
       ],
       child: MaterialApp(

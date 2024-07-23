@@ -8,7 +8,8 @@ class GetNews {
 
   GetNews(this.repository);
 
-  Future<Either<Failure, List<News>>> call(String countryCode) async {
-    return await repository.getNews(countryCode);
+  Future<Either<Failure, List<News>>> call(
+      String countryCode, String apiKey) async {
+    return await repository.getNews(countryCode, apiKey);
   }
 }

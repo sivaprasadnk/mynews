@@ -11,9 +11,10 @@ class NewsRepositoryImpl implements NewsRepository {
   NewsRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<Either<Failure, List<News>>> getNews(String country) async {
+  Future<Either<Failure, List<News>>> getNews(
+      String country, String apiKey) async {
     try {
-      final news = await remoteDataSource.getNews(country);
+      final news = await remoteDataSource.getNews(country, apiKey);
       return Right(news);
     } on ServerException {
       return Left(ServerFailure());
